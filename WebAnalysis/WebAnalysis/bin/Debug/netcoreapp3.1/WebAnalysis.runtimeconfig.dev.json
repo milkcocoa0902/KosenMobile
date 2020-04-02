@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "/home/keita/.dotnet/store/|arch|/|tfm|",
-      "/home/keita/.nuget/packages"
-    ]
-  }
-}
