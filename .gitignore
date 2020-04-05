@@ -1,2 +1,16 @@
 WebAnalysis/WebAnalysis/obj
 WebAnalysis/WebAnalysis/bin
+
+MobileApp/*.iml
+MobileApp/.gradle
+MobileApp/local.properties
+MobileApp/.idea/caches
+MobileApp/.idea/libraries
+MobileApp/.idea/modules.xml
+MobileApp/.idea/workspace.xml
+MobileApp/.idea/navEditor.xml
+MobileApp/.idea/assetWizardSettings.xml
+.DS_Store
+MobileApp/build
+MobileApp/captures
+MobileApp/.externalNativeBuild
