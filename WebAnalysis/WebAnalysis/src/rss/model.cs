@@ -54,7 +54,7 @@ namespace WebAnalysis.RSS{
             }
         }
 
-        public System.Collections.Generic.List<string> RequestBuilder(REQUEST _req, System.Collections.Generic.List<Table> _value){
+        public System.Collections.Generic.List<string> RequestBuilder(REQUEST _req, System.Collections.Concurrent.BlockingCollection<Table> _value){
             switch(_req){
                 case REQUEST.CREATE:
                     break;
