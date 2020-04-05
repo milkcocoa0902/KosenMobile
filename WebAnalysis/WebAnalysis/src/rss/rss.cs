@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using AngleSharp.Html;
 using AngleSharp.Html.Parser;
+using System.Security.Cryptography;
 
 
 namespace WebAnalysis.RSS{
@@ -14,18 +15,16 @@ namespace WebAnalysis.RSS{
 					}
 					}
 				static HtmlParser parser_;
-				class list{
-					public string date_;
-					public string detail_;
-					public string title_;
-				};
 
-				System.Collections.Generic.List<list> listElm_;
+				System.Collections.Generic.List<DataBase.Table> listElm_;
+
+				DataBase db_;
 
 				public RSS(){
 						client_ = new HttpClient();
 						parser_ = new HtmlParser();
-						listElm_ = new System.Collections.Generic.List<list>();
+						listElm_ = new System.Collections.Generic.List<DataBase.Table>();
+						db_ = new DataBase();
 				}
 
 				public async Task Build(){
@@ -37,14 +36,16 @@ namespace WebAnalysis.RSS{
 								.GetElementsByClassName("page-numbers")[4].InnerHtml;
 					System.Console.WriteLine("last:{0}", last);
 
-					Parallel.For(1, int.Parse(last), (int _, ParallelLoopState __)=>{
-						Console.WriteLine("page:{0}", _);
-						GetInformation(url_ + "page/" + _).Wait();
+					Parallel.For(1, int.Parse(last) + 1, (int _page)=>{
+						Console.WriteLine("page:{0}", _page);
+						GetInformation(url_ + "page/" + _page).Wait();
 					});
 					
 					listElm_.ForEach(item =>{
-							Console.WriteLine("date:{0}, title:{1}, detail:{2}", item.date_, item.title_, item.detail_);
+							Console.WriteLine("date:{0}, title:{1}, detail:{2}, no:{3}", item.date_, item.title_, item.detail_, item.hash_);
 						});
+
+						db_.EXECUTE(db_.RequestBuilder(DataBase.REQUEST.INSERT, listElm_));
 				}
 
 				public async Task Rebuild(){
@@ -54,30 +55,31 @@ namespace WebAnalysis.RSS{
 				public async Task Update(){
 
 				}
-				private async Task GetInformation(string url){
+				private async Task GetInformation(string _url){
+						Console.WriteLine(_url);
 					
-						var response = await client_.GetAsync(url);
+						var response = await client_.GetAsync(_url);
 						response.EnsureSuccessStatusCode();
 						var responseBody = await response.Content.ReadAsStringAsync();
 						var doc = (await parser_.ParseDocumentAsync(responseBody));
 						
+						try{
 						listElm_.AddRange(doc.GetElementsByClassName("widget_list")[0]
 						.QuerySelectorAll("li")
 						.Select(n =>{
 							var title = n.QuerySelectorAll("a").Last().InnerHtml;
 							var detail = n.QuerySelectorAll("a").Last().Attributes["href"].Value;
 							var date = n.QuerySelectorAll("time").First().Attributes["datetime"].Value;
+							var hash = System.Security.Cryptography.SHA512.Create().ComputeHash(((new System.Text.ASCIIEncoding()).GetBytes(detail))).ToString();
 
-
-							return new list{title_ = title, 
+							return new DataBase.Table{title_ = title, 
 										detail_ = detail, 
-										date_ = date
-										};
+										date_ = date,
+										hash_ = hash};
 						}).ToList());
-
-						//listElm_.ForEach(item =>{
-						//	Console.WriteLine("date:{0}, title:{1}, detail:{2}", item.date_, item.title_, item.detail_);
-						//});
+						}catch(Exception e){
+							Console.WriteLine(e.ToString());
+						}
 				}
 		};
 }

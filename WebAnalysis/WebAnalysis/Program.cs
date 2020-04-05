@@ -10,7 +10,6 @@ namespace WebAnalysis
 						var rss = new WebAnalysis.RSS.RSS();
             Console.WriteLine("Hello World!");
             rss.Build().Wait();
-            var a = new RSS.DataBase();
 				}
     }
 }
