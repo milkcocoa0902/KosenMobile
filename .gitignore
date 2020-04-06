@@ -1,6 +1,7 @@
 WebAnalysis/obj
 WebAnalysis/bin
 *.db
+Server/Server
 
 #
 # Auto Generated File
