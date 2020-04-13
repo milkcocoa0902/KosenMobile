@@ -70,7 +70,14 @@ namespace WebAnalysis.RSS{
 								var title = n.QuerySelectorAll("a").Last().InnerHtml;
 								var detail = n.QuerySelectorAll("a").Last().Attributes["href"].Value;
 								var date = n.QuerySelectorAll("time").First().Attributes["datetime"].Value;
-								var hash = System.Security.Cryptography.SHA512.Create().ComputeHash(((new System.Text.ASCIIEncoding()).GetBytes(detail))).ToString();
+								var hashByte = System.Security.Cryptography.SHA512.Create().ComputeHash(((new System.Text.ASCIIEncoding()).GetBytes(detail)));
+								
+								string hash;
+								var builder = new System.Text.StringBuilder();
+								foreach(var b in hashByte){
+										builder.Append(b.ToString("x2"));
+								}
+								hash = builder.ToString();
 
 								return new DataBase.Table{title_ = title, 
 											detail_ = detail, 
