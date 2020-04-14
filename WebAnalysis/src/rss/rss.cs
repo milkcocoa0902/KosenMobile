@@ -16,18 +16,30 @@ namespace WebAnalysis.RSS{
 					}
 				static HtmlParser parser_;
 
-				System.Collections.Concurrent.BlockingCollection<DataBase.Table> listElm_;
+				System.Collections.Concurrent.BlockingCollection<DataBase.Table> strage_;
 
 				DataBase db_;
 
 				public RSS(){
 						client_ = new HttpClient();
 						parser_ = new HtmlParser();
-						listElm_ = new System.Collections.Concurrent.BlockingCollection<DataBase.Table>();
+						strage_ = new System.Collections.Concurrent.BlockingCollection<DataBase.Table>();
 						db_ = new DataBase();
+
+						db_.Select(null, (_data)=>{
+										while(_data.Read() == true){
+											strage_.Add(new DataBase.Table{
+												title_ = (string)_data["title"],
+												detail_ = (string)_data["detail"],
+												date_ = (string)_data["date"],
+												hash_ = (string)_data["hash"]});
+												}});
+						Console.WriteLine("load from db");
 				}
 
 				public async Task Build(){
+					var publish = new System.Collections.Concurrent.BlockingCollection<DataBase.Table>();
+					var newElm = new System.Collections.Concurrent.BlockingCollection<DataBase.Table>();
 					var res = await client_.GetAsync(url_);
 					res.EnsureSuccessStatusCode();
 
@@ -38,38 +50,22 @@ namespace WebAnalysis.RSS{
 
 					Parallel.For(1, int.Parse(last) + 1, (int _page)=>{
 						Console.WriteLine("page:{0}", _page);
-						Parallel.ForEach(GetInformation(url_ + "page/" + _page).Result, (v)=>{listElm_.Add(v);});
+						Parallel.ForEach(GetInformation(url_ + "page/" + _page).Result, (_elm)=>{publish.Add(_elm);});
 					});
-					
-					listElm_.ToList().ForEach(item =>{
-							Console.WriteLine("date:{0}, title:{1}, detail:{2}, no:{3}", item.date_, item.title_, item.detail_, item.hash_);
-						});
 
-					db_.EXECUTE(db_.RequestBuilder(DataBase.REQUEST.INSERT, listElm_));
-				}
+					Parallel.ForEach(publish.ToList(), (_elm)=>{
+						var contain = strage_
+						.Where(_s => _s.hash_ == _elm.hash_)
+						.Count();
 
-				public async Task Rebuild(){
-					Build();
-				}
+						if(contain == 0){
+							Console.WriteLine("element {0} does not stored!!", _elm.hash_);
+							strage_.Add(_elm);
+							newElm.Add(_elm);
+						}
+					});
 
-				public void test(){
-				}
-
-				public async Task Update(){
-						db_.Select(null, (_data)=>{
-										while(_data.Read() == true){
-												var nExist = listElm_
-														.Where(elm => elm.hash_.Equals(_data["hash"]))
-														.Count() == 0;
-												if(nExist){
-													listElm_.Add(new DataBase.Table{title_ = (string)_data["title"],
-														detail_ = (string)_data["detail"],
-														date_ = (string)_data["date"],
-														hash_ = (string)_data["hash"]});
-													Console.WriteLine("Add");
-												}
-										}
-								});
+					db_.Insert(newElm);
 				}
 
 				private async Task<System.Collections.Concurrent.BlockingCollection<DataBase.Table>>  GetInformation(string _url){
