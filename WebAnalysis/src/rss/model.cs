@@ -40,6 +40,34 @@ namespace WebAnalysis.RSS{
             }
         }
 
+				public void Insert(System.Collections.Concurrent.BlockingCollection<Table> _value){
+						using (var con = new SQLiteConnection(connectionBuilder_.ToString())){
+								con.Open();
+								//System.Collections.Generic.List<string> query = new System.Collections.Generic.List<string>();
+								using(var cmd = new SQLiteCommand(con)){
+										foreach(var v in _value){
+												//query.Add("insert into " + tableName + "(date, title, detail, hash) values(" + $"'{v.date_}', '{v.title_}', '{v.detail_}', '{v.hash_}');");
+												cmd.CommandText = "insert into " + tableName + "(date, title, detail, hash) values(" + $"'{v.date_}', '{v.title_}', '{v.detail_}', '{v.hash_}');";
+												cmd.ExecuteScalar();
+										}
+								}
+								con.Close();
+						}
+				}
+
+
+
+				public void Select(string _query = null, Action<SQLiteDataReader> _cb = null){
+						using(var con = new SQLiteConnection(connectionBuilder_.ToString())){
+								con.Open();
+								using(var cmd = new SQLiteCommand(con)){
+									cmd.CommandText = "select * from " + tableName + ((_query != null) ? ("where " + _query + ";") : (";"));
+									_cb(cmd.ExecuteReader());
+								}
+								con.Close();
+						}
+				}
+
         public void EXECUTE(System.Collections.Generic.List<string> _query, Action<SQLiteDataReader> _cb = null){
             using (var con = new SQLiteConnection(connectionBuilder_.ToString())){
                 con.Open();

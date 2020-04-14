@@ -38,7 +38,7 @@ namespace WebAnalysis.RSS{
 
 					Parallel.For(1, int.Parse(last) + 1, (int _page)=>{
 						Console.WriteLine("page:{0}", _page);
-						GetInformation(url_ + "page/" + _page).Wait();
+						Parallel.ForEach(GetInformation(url_ + "page/" + _page).Result, (v)=>{listElm_.Add(v);});
 					});
 					
 					listElm_.ToList().ForEach(item =>{
@@ -52,16 +52,34 @@ namespace WebAnalysis.RSS{
 					Build();
 				}
 
-				public async Task Update(){
-
+				public void test(){
 				}
-				private async Task GetInformation(string _url){
+
+				public async Task Update(){
+						db_.Select(null, (_data)=>{
+										while(_data.Read() == true){
+												var nExist = listElm_
+														.Where(elm => elm.hash_.Equals(_data["hash"]))
+														.Count() == 0;
+												if(nExist){
+													listElm_.Add(new DataBase.Table{title_ = (string)_data["title"],
+														detail_ = (string)_data["detail"],
+														date_ = (string)_data["date"],
+														hash_ = (string)_data["hash"]});
+													Console.WriteLine("Add");
+												}
+										}
+								});
+				}
+
+				private async Task<System.Collections.Concurrent.BlockingCollection<DataBase.Table>>  GetInformation(string _url){
 						Console.WriteLine(_url);
 					
-						var response = await client_.GetAsync(_url);
+						var elm = new System.Collections.Concurrent.BlockingCollection<DataBase.Table>();
+						var response = client_.GetAsync(_url).Result;
 						response.EnsureSuccessStatusCode();
-						var responseBody = await response.Content.ReadAsStringAsync();
-						var doc = (await parser_.ParseDocumentAsync(responseBody));
+						var responseBody = response.Content.ReadAsStringAsync().Result;
+						var doc = parser_.ParseDocumentAsync(responseBody).Result;
 						
 						try{
 							Parallel.ForEach(doc.GetElementsByClassName("widget_list")[0]
@@ -84,11 +102,13 @@ namespace WebAnalysis.RSS{
 											date_ = date,
 											hash_ = hash};
 							}).ToList(), (v)=>{
-								listElm_.Add(v);
+								elm.Add(v);
 							});
 						}catch(Exception e){
 							Console.WriteLine(e.ToString());
 						}
+
+						return elm;
 				}
 		};
 }
