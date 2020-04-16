@@ -25,39 +25,34 @@ namespace KosenMobile.src.rss{
         CreateNew();
         Log.Debug("RSS.DataManager", "Create New Database");
       }
-      else
-      {
+
         Load();
         Log.Debug("RSS.DataManager", "Load Database");
-      }
     }
 
-   void CreateNew()
+   async Task CreateNew()
     {
-      new Task(() =>
+     await Task.Run(async () =>
       {
         client_ = new HttpClient();
         using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://me.milkcocoa.info/rss.db")))
-        using (var response = client_.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result)
+        using (var response = await client_.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
         {
 
           if (response.StatusCode == HttpStatusCode.OK)
           {
 
             var content = response.Content;
-            var stream = content.ReadAsStreamAsync().Result;
+            var stream = await content.ReadAsStreamAsync();
             var path = System.IO.Path.Combine(context_.DataDir.Path, "rss.db");
             var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
-            
 
-              stream.CopyTo(fileStream);
 
-            
-
+            stream.CopyTo(fileStream);
           }
         }
-      }).RunSynchronously();
-      
+      });
+
     }
 
     void Update()
@@ -70,9 +65,11 @@ namespace KosenMobile.src.rss{
       return false;
     }
 
-    void Load()
+    async Task Load()
     {
-
+      await Task.Run(() => {
+        System.Threading.Thread.Sleep(5000);
+      });
     }
 
   }
