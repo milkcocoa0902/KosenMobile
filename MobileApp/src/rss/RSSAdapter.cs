@@ -34,7 +34,7 @@ namespace KosenMobile.src.rss {
       ((Holder)(holder)).content_.Text = model_[position].title_;
       ((Holder)(holder)).id_ = model_[position].id_;
       ((Holder)(holder)).hash_ = model_[position].hash_;
-      ((Holder)(holder)).detail_ = model_[position].defail_;
+      ((Holder)(holder)).detail_ = model_[position].detail_;
       //((Holder)(holder)).content_.Click += (sender, e) => {}
     }
 
