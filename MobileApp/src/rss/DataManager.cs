@@ -6,9 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.IO;
 using System.Threading.Tasks;
+using Android.Content;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -22,11 +22,13 @@ namespace KosenMobile.src.rss{
     public DataManager(Context _context){
       context_ = _context;
       if (!File.Exists(System.IO.Path.Combine(context_.DataDir.Path, "rss.db"))) {
-        CreateNew();
+        CreateNew().Wait();
         Log.Debug("RSS.DataManager", "Create New Database");
+      } else {
+        Update();
       }
 
-        Load();
+        Load().Wait();
         Log.Debug("RSS.DataManager", "Load Database");
     }
 
@@ -71,6 +73,5 @@ namespace KosenMobile.src.rss{
         System.Threading.Thread.Sleep(5000);
       });
     }
-
   }
 }
