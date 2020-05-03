@@ -14,26 +14,27 @@ using Android.Graphics;
 
 namespace KosenMobile.src.rss {
   public class Adapter : RecyclerView.Adapter {
+    IReadOnlyList<DataModel.Model> model_;
     List<DataModel.Model> rows_;
     Activity activity_;
-    public Adapter(Activity _activity, List<DataModel.Model> _rows) {
+    public Adapter(Activity _activity, IReadOnlyList<DataModel.Model> _model) {
       activity_ = _activity;
-      rows_ = _rows;
+      model_ = _model;
     }
 
     public Adapter(Activity _activity) {
       activity_ = _activity;
     }
 
-    public override int ItemCount => rows_.Count;
+    public override int ItemCount => model_.Count;
     public Action<DataModel.Model> onRowClicked;
 
     public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-      ((Holder)(holder)).created_.Text = DateTime.Parse(rows_[position].date_).ToString("yyyy-MM-dd");
-      ((Holder)(holder)).content_.Text = rows_[position].title_;
-      ((Holder)(holder)).id_ = rows_[position].id_;
-      ((Holder)(holder)).hash_ = rows_[position].hash_;
-      ((Holder)(holder)).detail_ = rows_[position].defail_;
+      ((Holder)(holder)).created_.Text = DateTime.Parse(model_[position].date_).ToString("yyyy-MM-dd");
+      ((Holder)(holder)).content_.Text = model_[position].title_;
+      ((Holder)(holder)).id_ = model_[position].id_;
+      ((Holder)(holder)).hash_ = model_[position].hash_;
+      ((Holder)(holder)).detail_ = model_[position].defail_;
       //((Holder)(holder)).content_.Click += (sender, e) => {}
     }
 

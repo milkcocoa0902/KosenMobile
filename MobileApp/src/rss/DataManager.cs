@@ -28,7 +28,7 @@ namespace KosenMobile.src.rss{
         Update();
       }
 
-        Load().Wait();
+        Load();
         Log.Debug("RSS.DataManager", "Load Database");
     }
 
