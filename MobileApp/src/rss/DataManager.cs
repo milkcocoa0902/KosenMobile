@@ -19,16 +19,19 @@ namespace KosenMobile.src.rss{
   class DataManager{
     HttpClient client_;
     Context context_;
+    public DataModel dataModel_;
+
     public DataManager(Context _context){
+      dataModel_ = new DataModel(_context);
       context_ = _context;
-      if (!File.Exists(System.IO.Path.Combine(context_.DataDir.Path, "rss.db"))) {
+      if (!File.Exists(dataModel_.databasePath_)) {
         CreateNew().Wait();
         Log.Debug("RSS.DataManager", "Create New Database");
       } else {
         Update();
       }
 
-        Load().Wait();
+      Load().Wait();
         Log.Debug("RSS.DataManager", "Load Database");
     }
 
@@ -46,7 +49,7 @@ namespace KosenMobile.src.rss{
 
             var content = response.Content;
             var stream = await content.ReadAsStreamAsync();
-            var path = System.IO.Path.Combine(context_.DataDir.Path, "rss.db");
+            var path = dataModel_.databasePath_;
             var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
 
 
@@ -69,9 +72,9 @@ namespace KosenMobile.src.rss{
 
     async Task Load()
     {
-      await Task.Run(() => {
-        System.Threading.Thread.Sleep(5000);
-      });
+      Task.Run(() => {
+        dataModel_.read();
+      }).Wait();
     }
   }
 }
