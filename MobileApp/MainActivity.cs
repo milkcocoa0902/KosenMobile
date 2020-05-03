@@ -21,6 +21,7 @@ namespace KosenMobile {
 
       FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
       fab.Click += FabOnClick;
+      src.rss.DataManager mgr = new src.rss.DataManager(Application.Context);
     }
 
     public override bool OnCreateOptionsMenu(IMenu menu) {
