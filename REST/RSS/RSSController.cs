@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
+using WebAnalysis.RSS;
 
 namespace REST.RSS
 {
@@ -19,6 +20,8 @@ namespace REST.RSS
                 detail_ = @"just a dummy",
                 hash_ = @"0"}
             };
+
+        public static WebAnalysis.RSS.RSS RSSDataBase = new WebAnalysis.RSS.RSS();
         [HttpGet]
         public ActionResult<List<Table>> GetAction()=>data_;
 
@@ -28,11 +31,18 @@ namespace REST.RSS
             Console.WriteLine("ID:{0}", id);
             Console.WriteLine("data_.Count:{0}", data_.Count);
             Console.WriteLine(data_[0].title_);
-            for(var i = id; i < data_.Count; i++){
-                response.Add(data_[i]);
-            }
+            response = RSSDataBase.strage_
+						.Where(_s => _s.id_ > id)
+                        .Select(_s =>{
+								return new Table{
+                                    id_ = (int)_s.id_,
+                                    title_ = _s.title_, 
+                                    detail_ = _s.detail_, 
+                                    date_ = _s.date_,
+                                    hash_ = _s.hash_};
+                        }).ToList();
 
-Console.WriteLine("response.count:{0}", response.Count);
+            Console.WriteLine("response.count:{0}", response.Count);
             return response;
         }
        

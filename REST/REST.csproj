@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+<ItemGroup>
+    <Reference Include="myDll">
+        <HintPath>../WebAnalysis/bin/Debug/netcoreapp3.1/WebAnalysis.dll</HintPath>
+    </Reference>
+</ItemGroup>
+<ItemGroup>
+  <PackageReference Include="AngleSharp" Version="0.14.0" />
+  <PackageReference Include="System.Data.SQLite" Version="1.0.112.2" />
+</ItemGroup>
 
 </Project>
