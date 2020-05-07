@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 
 namespace WebAnalysis.RSS{
-		class RSS{
+		public class RSS{
 				static HttpClient client_;
 				static String url_{get{
 					return "https://www.toyota-ct.ac.jp/information/";
