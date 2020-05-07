@@ -4,7 +4,7 @@ using System.Data.SQLite;
 using System.Threading.Tasks;
 
 namespace WebAnalysis.RSS{
-    class DataBase{
+    public class DataBase{
         SQLiteConnectionStringBuilder connectionBuilder_;
         SQLiteConnection connection_;
 
@@ -20,6 +20,7 @@ namespace WebAnalysis.RSS{
 
 
         public class Table{
+            public Int64 id_;
             public string date_;
             public string detail_;
             public string title_;
