@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="0.14.0" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.112.0" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112.0" />
+  </ItemGroup>
+
+</Project>
