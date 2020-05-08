@@ -54,8 +54,6 @@ namespace KosenMobile {
 
       FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
       fab.Click += (sender, e) => {
-        dataModel_.adddata();
-        adapter_.NotifyDataSetChanged();
       };
 
     }
@@ -86,11 +84,14 @@ namespace KosenMobile {
     }
 
     void SwipeRefreshLayout.IOnRefreshListener.OnRefresh() {
-      new Handler().PostDelayed(() => {
-        swipe_.Refreshing = false;
-      }, 3000);
+      //new Handler().PostDelayed(() => {
+      //  swipe_.Refreshing = false;
+      //}, 3000);
 
       new Handler().Post(async () => {
+        await dataManager_.Update();
+        adapter_.NotifyDataSetChanged();
+        swipe_.Refreshing = false;
       });
     }
   }

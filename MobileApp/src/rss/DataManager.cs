@@ -30,7 +30,7 @@ namespace KosenMobile.src.rss{
         CreateNew().Wait();
         Log.Debug("RSS.DataManager", "Create New Database");
       } else {
-        Update();
+        if(CheckForUpdate()) Update().Wait();
       }
 
       Load().Wait();
@@ -39,10 +39,8 @@ namespace KosenMobile.src.rss{
 
    async Task CreateNew()
     {
-     await Task.Run(async () =>
-      {
         client_ = new HttpClient();
-        using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://me.milkcocoa.info/rss.db")))
+        using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://me.milkcocoa.info/WebAnalysis.db")))
         using (var response = await client_.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
         {
 
@@ -80,9 +78,7 @@ namespace KosenMobile.src.rss{
 
     async Task Load()
     {
-      Task.Run(() => {
         dataModel_.read();
-      }).Wait();
     }
   }
 }
