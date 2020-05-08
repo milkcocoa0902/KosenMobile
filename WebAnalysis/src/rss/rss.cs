@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 
 namespace WebAnalysis.RSS{
-		class RSS{
+		public class RSS{
 				static HttpClient client_;
 				static String url_{get{
 					return "https://www.toyota-ct.ac.jp/information/";
@@ -16,9 +16,10 @@ namespace WebAnalysis.RSS{
 					}
 				static HtmlParser parser_;
 
-				System.Collections.Concurrent.BlockingCollection<DataBase.Table> strage_;
+				public System.Collections.Concurrent.BlockingCollection<DataBase.Table> strage_{get; private set;}
 
 				DataBase db_;
+				Int64 maxId_;
 
 				public RSS(){
 						client_ = new HttpClient();
@@ -28,7 +29,11 @@ namespace WebAnalysis.RSS{
 
 						db_.Select(null, (_data)=>{
 										while(_data.Read() == true){
+											var a = _data["id"];
+											//Console.WriteLine(a.Type());
+											maxId_ = Math.Max(maxId_, (Int64)_data["id"]);
 											strage_.Add(new DataBase.Table{
+												id_ = (Int64)_data["id"],
 												title_ = (string)_data["title"],
 												detail_ = (string)_data["detail"],
 												date_ = (string)_data["date"],
@@ -60,6 +65,7 @@ namespace WebAnalysis.RSS{
 
 						if(contain == 0){
 							Console.WriteLine("element {0} does not stored!!", _elm.hash_);
+							_elm.id_ = (++maxId_);
 							strage_.Add(_elm);
 							newElm.Add(_elm);
 						}
