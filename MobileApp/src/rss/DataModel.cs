@@ -44,9 +44,9 @@ namespace KosenMobile.src.rss {
       };
     }
 
-    public void adddata() {
-      
-      data_.Add(new Model() {date_ = "2020-03-01", detail_ = "", hash_ = "", id_ = "", title_ = "aefwefwe" });
+    public void adddata(List<Model> _data) {
+      _data.Reverse();
+      data_.InsertRange(0, _data);
     }
 
     public override void OnCreate(SQLiteDatabase db) {
@@ -69,8 +69,17 @@ namespace KosenMobile.src.rss {
       base.OnConfigure(db);
     }
 
-    public void write() {
+    public void write(List<Model> _data) {
       var db = this.WritableDatabase;
+      foreach(var d in _data) {
+        ContentValues values = new ContentValues();
+        values.Put(HEADER.id_, d.id_);
+        values.Put(HEADER.title_, d.title_);
+        values.Put(HEADER.date_, d.date_);
+        values.Put(HEADER.detail_, d.detail_);
+        values.Put(HEADER.hash_, d.hash_);
+        db.Insert(tableName_, null, values);
+      }
     }
 
     public void read() {

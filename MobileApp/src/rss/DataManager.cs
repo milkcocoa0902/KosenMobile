@@ -15,6 +15,8 @@ using Android.Views;
 using Android.Widget;
 using Android.Util;
 
+using Newtonsoft.Json;
+
 namespace KosenMobile.src.rss{
   class DataManager{
     HttpClient client_;
@@ -28,7 +30,7 @@ namespace KosenMobile.src.rss{
         CreateNew().Wait();
         Log.Debug("RSS.DataManager", "Create New Database");
       } else {
-        Update();
+        if(CheckForUpdate()) Update().Wait();
       }
 
       Load().Wait();
@@ -37,10 +39,8 @@ namespace KosenMobile.src.rss{
 
    async Task CreateNew()
     {
-     await Task.Run(async () =>
-      {
         client_ = new HttpClient();
-        using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://me.milkcocoa.info/rss.db")))
+        using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://me.milkcocoa.info/WebAnalysis.db")))
         using (var response = await client_.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
         {
 
@@ -56,13 +56,19 @@ namespace KosenMobile.src.rss{
             stream.CopyTo(fileStream);
           }
         }
-      });
 
     }
 
-    void Update()
+    public async Task Update()
     {
-      if (!CheckForUpdate()) return;
+
+      client_ = new HttpClient();
+      var endpoint = "http://kosenmobile.milkcocoa.info/update/";
+      var count = dataModel_.dataRef_.Count;
+      var response = await client_.GetAsync(endpoint + count.ToString());
+      var jsonString = await response.Content.ReadAsStringAsync();
+      var json = JsonConvert.DeserializeObject<List<DataModel.Model>>(jsonString);
+      dataModel_.adddata(json);
     }
 
     bool CheckForUpdate()
@@ -72,9 +78,7 @@ namespace KosenMobile.src.rss{
 
     async Task Load()
     {
-      Task.Run(() => {
         dataModel_.read();
-      }).Wait();
     }
   }
 }
