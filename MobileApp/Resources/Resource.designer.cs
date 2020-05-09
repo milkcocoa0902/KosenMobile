@@ -4244,13 +4244,16 @@ namespace KosenMobile
 			public const int visible = 2131230919;
 			
 			// aapt resource value: 0x7F0800C8
-			public const int withText = 2131230920;
+			public const int webView = 2131230920;
 			
 			// aapt resource value: 0x7F0800C9
-			public const int wrap_content = 2131230921;
+			public const int withText = 2131230921;
 			
 			// aapt resource value: 0x7F0800CA
-			public const int year = 2131230922;
+			public const int wrap_content = 2131230922;
+			
+			// aapt resource value: 0x7F0800CB
+			public const int year = 2131230923;
 			
 			static Id()
 			{
@@ -4511,19 +4514,22 @@ namespace KosenMobile
 			public const int notification_template_part_time = 2131427381;
 			
 			// aapt resource value: 0x7F0B0036
-			public const int rss_summary = 2131427382;
+			public const int rss_detail_activity = 2131427382;
 			
 			// aapt resource value: 0x7F0B0037
-			public const int select_dialog_item_material = 2131427383;
+			public const int rss_summary = 2131427383;
 			
 			// aapt resource value: 0x7F0B0038
-			public const int select_dialog_multichoice_material = 2131427384;
+			public const int select_dialog_item_material = 2131427384;
 			
 			// aapt resource value: 0x7F0B0039
-			public const int select_dialog_singlechoice_material = 2131427385;
+			public const int select_dialog_multichoice_material = 2131427385;
 			
 			// aapt resource value: 0x7F0B003A
-			public const int support_simple_spinner_dropdown_item = 2131427386;
+			public const int select_dialog_singlechoice_material = 2131427386;
+			
+			// aapt resource value: 0x7F0B003B
+			public const int support_simple_spinner_dropdown_item = 2131427387;
 			
 			static Layout()
 			{
