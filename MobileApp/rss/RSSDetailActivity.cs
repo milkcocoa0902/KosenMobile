@@ -24,5 +24,17 @@ namespace KosenMobile.rss {
 
       // Create your application here
     }
+
+    public override bool OnKeyDown([GeneratedEnum] Keycode keyCode, KeyEvent e) {
+      switch(keyCode) {
+      case Keycode.Back:
+        Finish();
+        return false;
+        break;
+      default:
+        break;
+      }
+      return base.OnKeyDown(keyCode, e);
+    }
   }
 }
