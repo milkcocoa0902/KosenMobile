@@ -5,7 +5,7 @@ using Android.Support.V7.Widget;
 using Android.Runtime;
 
 
-namespace KosenMobile.src.rss {
+namespace KosenMobile.rss {
   public class Holder : RecyclerView.ViewHolder {
     public TextView created_;
     public TextView content_;

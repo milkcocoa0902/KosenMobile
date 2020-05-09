@@ -64,10 +64,10 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\rss\DataManager.cs" />
-    <Compile Include="src\rss\ViewHolder.cs" />
-    <Compile Include="src\rss\RSSAdapter.cs" />
-    <Compile Include="src\rss\DataModel.cs" />
+    <Compile Include="rss\DataManager.cs" />
+    <Compile Include="rss\DataModel.cs" />
+    <Compile Include="rss\RSSAdapter.cs" />
+    <Compile Include="rss\ViewHolder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -115,6 +115,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="rss\" />
+    <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />

@@ -12,7 +12,7 @@ using Android.Runtime;
 using Android.App;
 using Android.Graphics;
 
-namespace KosenMobile.src.rss {
+namespace KosenMobile.rss {
   public class Adapter : RecyclerView.Adapter {
     IReadOnlyList<DataModel.Model> model_;
     List<DataModel.Model> rows_;
