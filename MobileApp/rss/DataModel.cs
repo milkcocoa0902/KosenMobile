@@ -8,8 +8,8 @@ using Android.Database;
 using Android.Runtime;
 using System.Threading.Tasks;
 
-namespace KosenMobile.src.rss {
-  public class DataModel: SQLiteOpenHelper {
+namespace KosenMobile.rss {
+  public class DataModel : SQLiteOpenHelper {
     public class Model {
       public string id_;
       public string date_;
@@ -23,14 +23,14 @@ namespace KosenMobile.src.rss {
     Context context_;
     private static int databaseVersion_ => 1;
     public static string databaseName_ => "rss.db";
-    public  string databasePath_;
+    public string databasePath_;
     private static string tableName_ => "rss";
 
     private List<Model> data_;
     public IReadOnlyList<Model> dataRef_;
 
 
-    public DataModel(Context _context) : base(_context, System.IO.Path.Combine(_context.DataDir.Path, DataModel.databaseName_), null, databaseVersion_)  {
+    public DataModel(Context _context) : base(_context, System.IO.Path.Combine(_context.DataDir.Path, DataModel.databaseName_), null, databaseVersion_) {
       context_ = _context;
       databasePath_ = System.IO.Path.Combine(context_.DataDir.Path, DataModel.databaseName_);
       data_ = new List<Model>();
@@ -99,7 +99,7 @@ namespace KosenMobile.src.rss {
         null,
         "date DESC");
 
-      
+
       cursor.MoveToFirst();
       for(var i = 0;i < cursor.Count;i++) {
         data_.Add(new Model() {

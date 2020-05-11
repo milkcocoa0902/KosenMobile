@@ -11,9 +11,9 @@ using Android.Views;
 namespace KosenMobile {
   [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
   public class MainActivity : AppCompatActivity, SwipeRefreshLayout.IOnRefreshListener {
-    src.rss.Adapter adapter_;
-    src.rss.DataModel dataModel_;
-    src.rss.DataManager dataManager_;
+    rss.Adapter adapter_;
+    rss.DataModel dataModel_;
+    rss.DataManager dataManager_;
     SwipeRefreshLayout swipe_;
     LinearLayoutManager manager_;
 
@@ -37,14 +37,14 @@ namespace KosenMobile {
       });
 
 
-      dataManager_ = new src.rss.DataManager(Application.Context);
+      dataManager_ = new rss.DataManager(Application.Context);
       var recycler = FindViewById<RecyclerView>(Resource.Id.timeLine);
 
       /// TODO:
       /// onCreate()で重い処理を実行することは
       /// 起動時間的にも懸念事項となるので将来的に
       /// は別のところで実行をする．
-      adapter_ = new src.rss.Adapter(this, dataManager_.dataModel_.dataRef_);
+      adapter_ = new rss.Adapter(this, dataManager_.dataModel_.dataRef_);
       manager_ = new LinearLayoutManager(this);
       recycler.HasFixedSize = false;
       recycler.SetLayoutManager(manager_);

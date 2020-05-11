@@ -12,7 +12,8 @@ using Android.Runtime;
 using Android.App;
 using Android.Graphics;
 
-namespace KosenMobile.src.rss {
+
+namespace KosenMobile.rss {
   public class Adapter : RecyclerView.Adapter {
     IReadOnlyList<DataModel.Model> model_;
     List<DataModel.Model> rows_;
@@ -35,7 +36,18 @@ namespace KosenMobile.src.rss {
       ((Holder)(holder)).id_ = model_[position].id_;
       ((Holder)(holder)).hash_ = model_[position].hash_;
       ((Holder)(holder)).detail_ = model_[position].detail_;
-      //((Holder)(holder)).content_.Click += (sender, e) => {}
+      ((Holder)(holder)).content_.Click += async (sender, e) => {
+        if(!((TextView)sender).Clickable) return;
+        ((TextView)sender).Clickable = false;
+
+        new Handler().PostDelayed(async () => {
+          ((TextView)sender).Clickable = true;
+        }, 1000);
+
+        var intent = new Android.Content.Intent(activity_.ApplicationContext, typeof(rss.RSSDetailActivity)) ;
+        intent.PutExtra("detail", ((Holder)holder).detail_);
+        activity_.StartActivity(intent);
+      };
     }
 
     public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
