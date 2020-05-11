@@ -59,6 +59,7 @@
     <Reference Include="Mono.Android" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -69,6 +70,8 @@
     <Compile Include="rss\RSSAdapter.cs" />
     <Compile Include="rss\ViewHolder.cs" />
     <Compile Include="rss\RSSDetailActivity.cs" />
+    <Compile Include="preference\DataModel.cs" />
+    <Compile Include="preference\DataManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -122,6 +125,7 @@
     <Folder Include="Resources\drawable\" />
     <Folder Include="rss\" />
     <Folder Include="src\" />
+    <Folder Include="preference\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
