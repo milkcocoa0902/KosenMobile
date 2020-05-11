@@ -44,9 +44,17 @@ namespace KosenMobile.rss {
           ((TextView)sender).Clickable = true;
         }, 1000);
 
-        var intent = new Android.Content.Intent(activity_.ApplicationContext, typeof(rss.RSSDetailActivity)) ;
-        intent.PutExtra("detail", ((Holder)holder).detail_);
-        activity_.StartActivity(intent);
+
+        if(((Holder)holder).detail_.Contains(".pdf")) {
+          var intent = new Android.Content.Intent(Intent.ActionView);
+          intent.SetDataAndType(Android.Net.Uri.Parse(((Holder)holder).detail_), "application/pdf");
+          activity_.StartActivity(intent);
+
+        } else {
+          var intent = new Android.Content.Intent(activity_.ApplicationContext, typeof(rss.RSSDetailActivity));
+          intent.PutExtra("detail", ((Holder)holder).detail_);
+          activity_.StartActivity(intent);
+        }
       };
     }
 
