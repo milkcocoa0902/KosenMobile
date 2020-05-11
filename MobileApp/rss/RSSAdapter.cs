@@ -56,6 +56,13 @@ namespace KosenMobile.rss {
           activity_.StartActivity(intent);
         }
       };
+
+      if(((Holder)holder).detail_.EndsWith(".pdf")) {
+        ((Holder)holder).pdfIcon_.Visibility = ViewStates.Visible;
+      } else {
+        ((Holder)holder).pdfIcon_.Visibility = ViewStates.Invisible;
+      }
+
     }
 
     public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
