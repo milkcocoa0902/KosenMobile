@@ -15,9 +15,14 @@ namespace WebAnalysis.Syllabus{
 					return "https://syllabus.kosen-k.go.jp/Pages/PublicSubjects";
 					}
 				}
+				static String detailUrl_{get{
+					return "https://syllabus.kosen-k.go.jp/Pages/PublicSyllabus";
+					}
+				}
 
 				static HtmlParser parser_;
 				public System.Collections.Concurrent.BlockingCollection<Model> strage_{get; private set;}
+				public System.Collections.Concurrent.BlockingCollection<query> query_{get; private set;}
 
 				Model model_;
 				Int64 maxId_;
@@ -64,16 +69,32 @@ namespace WebAnalysis.Syllabus{
 											.GetElementsByClassName("subject-item");
 							foreach(var sbj in subject){
 								var detail = sbj.GetElementsByClassName("mcc-show")[0].Attributes["href"].Value;
-								var q = detail.Split("?")[1].Split("&");
-								foreach(var elm in q){
+								var req = detail.Split("?")[1].Split("&");
+								var q = new query();
+								foreach(var elm in req){
 									var key = elm.Split("=")[0];
 									var val = elm.Split("=")[1];
-									Console.WriteLine("{0}: {1}", key, val);
+									switch(key){
+									case "school_id":
+											q.school_id = val;
+											break;
+									case "department_id":
+											q.department_id = val;
+											break;
+									case "subject_code":
+											q.subject_code = val;
+											break;
+									case "year":
+											q.year = val;
+											break;
+									}
 								}
-
+								query_.Add(q);
 							}
 
 						});
+
+						
 
 					// 各学科のURLを取得
 					// 各学科のページから科目URLを取得
