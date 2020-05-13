@@ -32,7 +32,7 @@ namespace WebAnalysis.Syllabus{
 						parser_ = new HtmlParser();
 						strage_ = new System.Collections.Concurrent.BlockingCollection<Model>();
 						model_ = new Model();
-
+						query_ = new System.Collections.Concurrent.BlockingCollection<query>();
 				}
 
 				public void TEST(){
