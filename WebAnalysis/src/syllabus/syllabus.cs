@@ -60,10 +60,8 @@ namespace WebAnalysis.Syllabus{
 							Console.WriteLine(string.Join("?", new []{url_, _course.Serialize()}));
 							var res = client.GetAsync(string.Join("?", new []{url_, _course.Serialize()})).Result;
 						
-							Console.WriteLine("afwef");
 							res.EnsureSuccessStatusCode();
 							var parser = new HtmlParser();
-							Console.WriteLine("afwef");
 
 							var subject = ( parser.ParseDocumentAsync(res.Content.ReadAsStringAsync().Result)).Result
 											.GetElementsByClassName("subject-item");
