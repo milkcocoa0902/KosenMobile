@@ -89,8 +89,54 @@ namespace WebAnalysis.Syllabus{
 								}
 								query_.Add(q);
 							}
-
 						});
+
+							Parallel.ForEach(query_, (q)=>{
+								var client = new HttpClient();
+								Console.WriteLine(string.Join("?", new []{detailUrl_, q.Serialize()}));
+								var res = client.GetAsync(string.Join("?", new []{detailUrl_, q.Serialize()})).Result;
+								res.EnsureSuccessStatusCode();
+								var parser = new HtmlParser();
+
+								Model model = new Model();
+								model.id_ = q.subject_code;
+
+								model.course_ = q.subject_code[1].ToString();
+								model.grade_ = q.subject_code[2] - '0';
+
+								model.title_ = (parser.ParseDocumentAsync(res.Content.ReadAsStringAsync().Result)).Result
+													.GetElementsByClassName("mcc-title-bar")[0]
+													.QuerySelectorAll("h1")
+													.First()
+													.InnerHtml;
+								
+								model.assesment_ = new List<Assessment>();
+								var assessmentTable = (parser.ParseDocumentAsync(res.Content.ReadAsStringAsync().Result)).Result
+															.GetElementById("MainContent_SubjectSyllabus_wariaiTable")
+															.QuerySelectorAll("tr");
+								var assesmentName = assessmentTable[0].QuerySelectorAll("th")
+																		.Select(n =>{
+																			return n.InnerHtml;
+																		}).ToList();
+																		
+								var assesmentVal = assessmentTable[1].QuerySelectorAll("td")
+																		.Select(n =>{
+																			return n.QuerySelectorAll("b").First().InnerHtml;
+																		}).ToList();
+								
+								for(var i = 0;i < assesmentName.Count() - 1;i++){
+									model.assesment_.Add(new Assessment(){
+										name_ = assesmentName[i],
+										value_ = int.Parse(assesmentVal[i])
+									});
+								}
+
+								strage_.Add(model);
+							});
+
+							foreach(var m in strage_){
+								Console.WriteLine("title:{0}, id:{1}", m.title_, m.id_);
+							}
 
 						
 
