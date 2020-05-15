@@ -17,16 +17,16 @@ using Android.Util;
 
 using Newtonsoft.Json;
 
-namespace KosenMobile.src.rss{
-  class DataManager{
+namespace KosenMobile.rss {
+  class DataManager {
     HttpClient client_;
     Context context_;
     public DataModel dataModel_;
 
-    public DataManager(Context _context){
+    public DataManager(Context _context) {
       dataModel_ = new DataModel(_context);
       context_ = _context;
-      if (!File.Exists(dataModel_.databasePath_)) {
+      if(!File.Exists(dataModel_.databasePath_)) {
         CreateNew().Wait();
         Log.Debug("RSS.DataManager", "Create New Database");
       } else {
@@ -34,33 +34,29 @@ namespace KosenMobile.src.rss{
       }
 
       Load().Wait();
-        Log.Debug("RSS.DataManager", "Load Database");
+      Log.Debug("RSS.DataManager", "Load Database");
     }
 
-   async Task CreateNew()
-    {
-        client_ = new HttpClient();
-        using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://me.milkcocoa.info/WebAnalysis.db")))
-        using (var response = await client_.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
-        {
+    async Task CreateNew() {
+      client_ = new HttpClient();
+      using(var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://me.milkcocoa.info/WebAnalysis.db")))
+      using(var response = await client_.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)) {
 
-          if (response.StatusCode == HttpStatusCode.OK)
-          {
+        if(response.StatusCode == HttpStatusCode.OK) {
 
-            var content = response.Content;
-            var stream = await content.ReadAsStreamAsync();
-            var path = dataModel_.databasePath_;
-            var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
+          var content = response.Content;
+          var stream = await content.ReadAsStreamAsync();
+          var path = dataModel_.databasePath_;
+          var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
 
 
-            stream.CopyTo(fileStream);
-          }
+          stream.CopyTo(fileStream);
         }
+      }
 
     }
 
-    public async Task Update()
-    {
+    public async Task Update() {
 
       client_ = new HttpClient();
       var endpoint = "http://kosenmobile.milkcocoa.info/update/";
@@ -71,14 +67,12 @@ namespace KosenMobile.src.rss{
       dataModel_.adddata(json);
     }
 
-    bool CheckForUpdate()
-    {
+    bool CheckForUpdate() {
       return false;
     }
 
-    async Task Load()
-    {
-        dataModel_.read();
+    async Task Load() {
+      dataModel_.read();
     }
   }
 }

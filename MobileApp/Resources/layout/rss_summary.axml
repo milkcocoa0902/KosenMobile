@@ -3,47 +3,56 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content">
-	    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="8dp"
-        android:background="#ff808080"
-				android:id="@+id/upper_line"/>
-	
-<RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginBottom="8dp"
+		android:background="#ff808080"
+		android:id="@+id/upper_line"/>
+
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		android:layout_below="@id/upper_line"
 		android:id="@+id/rss_main_content">
-<TextView
-		android:id="@+id/postedDate"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-		android:layout_marginLeft="30dp"
-		android:layout_marginVertical="5dp"
-		android:layout_centerVertical="true"
-		android:text="YYYY-MM-DD"
-		android:textAppearance="?android:attr/textAppearanceSmall"
-		android:textColor="@color/material_grey_600"/>
-<TextView
-		android:id="@+id/postedTitle"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-		android:layout_marginRight="10dp"
-		android:layout_marginLeft="30px"
-		android:layout_marginVertical="5dp"
-		android:layout_toRightOf="@id/postedDate"
-		android:layout_centerVertical="true"
-		android:paddingHorizontal="8dp"
-		android:text="ああああああああああ"
-		android:textAppearance="?android:attr/textAppearanceMedium"/>
-</RelativeLayout>
-	    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="#ff808080"
-				android:id="@+id/bottom_line"
+		<TextView
+			android:id="@+id/postedDate"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="30dp"
+			android:layout_marginVertical="5dp"
+			android:layout_centerVertical="true"
+			android:text="YYYY-MM-DD"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:textColor="@color/material_grey_600"/>
+		<TextView
+			android:id="@+id/postedTitle"
+			android:layout_toRightOf="@id/pdficon"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="10dp"
+			android:layout_marginLeft="15px"
+			android:layout_marginVertical="5dp"
+			android:layout_centerVertical="true"
+			android:paddingHorizontal="8dp"
+			android:text="ああああああああああ"
+			android:textAppearance="?android:attr/textAppearanceMedium"/>
+		<ImageView
+			android:src="@drawable/pdficon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="5px"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="5px"
+			android:layout_toRightOf="@id/postedDate"
+			android:visibility="visible"
+			android:id="@+id/pdficon" />
+	</RelativeLayout>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginTop="8dp"
+		android:background="#ff808080"
+		android:id="@+id/bottom_line"
 		android:layout_below="@id/rss_main_content"/>
 </RelativeLayout>
