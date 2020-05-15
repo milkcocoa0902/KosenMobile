@@ -6,6 +6,7 @@ using AngleSharp.Html;
 using AngleSharp.Html.Parser;
 using System.Security.Cryptography;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 
 namespace WebAnalysis.Syllabus{
@@ -21,17 +22,17 @@ namespace WebAnalysis.Syllabus{
 				}
 
 				static HtmlParser parser_;
-				public System.Collections.Concurrent.BlockingCollection<Model> strage_{get; private set;}
+				public System.Collections.Concurrent.BlockingCollection<Subject> strage_{get; private set;}
 				public System.Collections.Concurrent.BlockingCollection<query> query_{get; private set;}
 
-				Model model_;
+				Subject model_;
 				Int64 maxId_;
 
 				public Syllabus(){
 						client_ = new HttpClient();
 						parser_ = new HtmlParser();
-						strage_ = new System.Collections.Concurrent.BlockingCollection<Model>();
-						model_ = new Model();
+						strage_ = new System.Collections.Concurrent.BlockingCollection<Subject>();
+						model_ = new Subject();
 						query_ = new System.Collections.Concurrent.BlockingCollection<query>();
 				}
 
@@ -98,7 +99,7 @@ namespace WebAnalysis.Syllabus{
 								res.EnsureSuccessStatusCode();
 								var parser = new HtmlParser();
 
-								Model model = new Model();
+								Subject model = new Subject();
 								model.id_ = q.subject_code;
 
 								model.course_ = q.subject_code[1].ToString();
@@ -134,9 +135,14 @@ namespace WebAnalysis.Syllabus{
 								strage_.Add(model);
 							});
 
-							foreach(var m in strage_){
-								Console.WriteLine("title:{0}, id:{1}", m.title_, m.id_);
-							}
+							//foreach(var m in strage_){
+							//	Console.WriteLine("title:{0}, id:{1}", m.title_, m.id_);
+						//	}
+
+							var serializer = new XmlSerializer(typeof(List<Subject>));
+							System.IO.StreamWriter sw = new System.IO.StreamWriter("Syllabus.xml", false, new System.Text.UTF8Encoding());
+							serializer.Serialize(sw, strage_.ToList());
+							sw.Close();
 
 						
 
