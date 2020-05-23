@@ -17,6 +17,8 @@ namespace KosenMobile {
     SwipeRefreshLayout swipe_;
     LinearLayoutManager manager_;
 
+    preference.DataManager preferenceManager;
+
     protected override void OnCreate(Bundle savedInstanceState) {
       base.OnCreate(savedInstanceState);
       Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -35,6 +37,8 @@ namespace KosenMobile {
         Application.Context.GetColor(Resource.Color.blue),
         Application.Context.GetColor(Resource.Color.limegreen)
       });
+
+      preferenceManager = new preference.DataManager(ApplicationContext);
 
 
       dataManager_ = new rss.DataManager(Application.Context);
@@ -66,6 +70,7 @@ namespace KosenMobile {
     public override bool OnOptionsItemSelected(IMenuItem item) {
       int id = item.ItemId;
       if(id == Resource.Id.action_settings) {
+        StartActivity(new Android.Content.Intent(ApplicationContext, typeof(preference.PreferenceActivity)));
         return true;
       }
 

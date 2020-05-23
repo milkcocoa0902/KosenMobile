@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+	<Switch
+		android:text="内蔵のブラウザを使用する"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:id="@+id/useInternalBrowserSwitch" />
+	<Switch
+		android:text="お知らせの詳細をローカルにキャッシュする"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/rssCacheSwitch" />
+	<Switch
+		android:text="お知らせの更新を自動的に受け取る"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/rssAutoUpdateSwitch" />
+	<Switch
+		android:text="プッシュ通知を利用する"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/pushNotifSwitch" />
+</LinearLayout>
