@@ -88,7 +88,12 @@ namespace WebAnalysis.Syllabus{
 											break;
 									}
 								}
-								query_.Add(q);
+
+
+								var tryAdd = false;
+								do{
+									tryAdd = query_.TryAdd(q, 500);
+								}while(!tryAdd);
 							}
 						});
 
@@ -135,7 +140,10 @@ namespace WebAnalysis.Syllabus{
 									});
 								}
 
-								strage_.Add(model);
+								var tryAdd = false;
+								do{
+									tryAdd = strage_.TryAdd(model, 500);
+								}while(!tryAdd);
 							});
 
 							while(!syllabusGetLoop.IsCompleted);
