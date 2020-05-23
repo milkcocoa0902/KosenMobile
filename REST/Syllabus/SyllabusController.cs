@@ -37,9 +37,16 @@ namespace REST.Syllabus
             return subject_.Where(elm => id.ToString("D5").Equals(elm.id_)).ToList();
         }
 
-				[HttpGet("title/{title}", Name="ccc")]
-        public ActionResult<List<Subject>> GetSubject(string title){
-					return subject_.Where(elm => title.Equals(elm.title_)).ToList();
+				[HttpGet("title/equal/{title}", Name="ccc")]
+        public ActionResult<List<Subject>> GetSubjectEqualness(string title){
+
+					return subject_.Where(elm => string.Compare(elm.title_, title) == 0).ToList();
+			  }
+
+				[HttpGet("title/contain/{title}", Name="ddd")]
+        public ActionResult<List<Subject>> GetSubjectContains(string title){
+Console.Write("{0}", title);
+					return subject_.Where(elm => elm.title_.Contains( title)).ToList();
 			  }
     }
     
