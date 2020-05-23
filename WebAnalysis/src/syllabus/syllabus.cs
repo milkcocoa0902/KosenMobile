@@ -55,7 +55,7 @@ namespace WebAnalysis.Syllabus{
 										});
 						}
 					
-						Parallel.ForEach(courseList, (_course)=>{
+						var courseListLoop = Parallel.ForEach(courseList, (_course)=>{
 							var client = new HttpClient();
 
 							Console.WriteLine(string.Join("?", new []{url_, _course.Serialize()}));
@@ -92,7 +92,10 @@ namespace WebAnalysis.Syllabus{
 							}
 						});
 
-							Parallel.ForEach(query_, (q)=>{
+							while(!courseListLoop.IsCompleted);
+							Console.WriteLine("Complete to Tasking,  Add to Queue");
+
+							var syllabusGetLoop = Parallel.ForEach(query_, (q)=>{
 								var client = new HttpClient();
 								Console.WriteLine(string.Join("?", new []{detailUrl_, q.Serialize()}));
 								var res = client.GetAsync(string.Join("?", new []{detailUrl_, q.Serialize()})).Result;
@@ -134,6 +137,10 @@ namespace WebAnalysis.Syllabus{
 
 								strage_.Add(model);
 							});
+
+							while(!syllabusGetLoop.IsCompleted);
+							Console.WriteLine("Complete to Tasking,  Add to Queue");
+
 
 							//foreach(var m in strage_){
 							//	Console.WriteLine("title:{0}, id:{1}", m.title_, m.id_);
