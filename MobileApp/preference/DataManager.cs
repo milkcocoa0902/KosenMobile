@@ -10,7 +10,7 @@ namespace KosenMobile.preference {
     string preferencePath_;
     string preferenceFileName_ = "preference.xml";
     Context context_;
-    DataModel dataModel_;
+    public DataModel dataModel_ { get; private set; }
 
     public DataManager(Context _context) {
       context_ = _context;
@@ -22,7 +22,7 @@ namespace KosenMobile.preference {
       }
     }
 
-    void Restore() {
+    public void Restore() {
       dataModel_.Write(new DataModel.Model() {
         checkForUpdate_ = false,
         cache_ = false,
@@ -30,15 +30,15 @@ namespace KosenMobile.preference {
       });
     }
 
-    void Load() {
+    public void Load() {
       dataModel_.Read();
     }
 
-    void Store() {
+    public void Store() {
       dataModel_.write();
     }
 
-    void Store(DataModel.Model _model) {
+    public void Store(DataModel.Model _model) {
       dataModel_.Write(_model);
     }
 
