@@ -70,6 +70,7 @@ namespace KosenMobile {
     public override bool OnOptionsItemSelected(IMenuItem item) {
       int id = item.ItemId;
       if(id == Resource.Id.action_settings) {
+        StartActivity(new Android.Content.Intent(ApplicationContext, typeof(preference.PreferenceActivity)));
         return true;
       }
 
