@@ -72,6 +72,7 @@
     <Compile Include="rss\RSSDetailActivity.cs" />
     <Compile Include="preference\DataModel.cs" />
     <Compile Include="preference\DataManager.cs" />
+    <Compile Include="preference\PreferenceActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -117,6 +118,14 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\rss_detail_activity.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\preference_activity.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\text_with_checkbox.axml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
