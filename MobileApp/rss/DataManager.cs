@@ -40,12 +40,14 @@ namespace KosenMobile.rss {
     async Task CreateNew() {
       client_ = new HttpClient();
       using(var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://me.milkcocoa.info/WebAnalysis.db")))
-      using(var response = await client_.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)) {
+      using(var response = client_.SendAsync(request).Result) {
 
         if(response.StatusCode == HttpStatusCode.OK) {
 
           var content = response.Content;
-          var stream = await content.ReadAsStreamAsync();
+          var stream = content.ReadAsStreamAsync().Result;
+
+
           var path = dataModel_.databasePath_;
           var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
 
