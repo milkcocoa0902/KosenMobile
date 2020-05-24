@@ -47,6 +47,7 @@ namespace KosenMobile.rss {
     public void adddata(List<Model> _data) {
       _data.Reverse();
       data_.InsertRange(0, _data);
+      write(_data);
     }
 
     public override void OnCreate(SQLiteDatabase db) {
