@@ -22,7 +22,7 @@ namespace KosenMobile {
     protected override void OnCreate(Bundle savedInstanceState) {
       base.OnCreate(savedInstanceState);
       Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-      SetContentView(Resource.Layout.activity_main);
+      SetContentView(Resource.Layout.rss_activity);
 
       Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
       toolbar.Title = "";
