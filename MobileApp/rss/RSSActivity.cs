@@ -10,7 +10,7 @@ using Android.Views;
 
 namespace KosenMobile {
   [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-  public class MainActivity : AppCompatActivity, SwipeRefreshLayout.IOnRefreshListener {
+  public class RSSActivity : AppCompatActivity, SwipeRefreshLayout.IOnRefreshListener {
     rss.Adapter adapter_;
     rss.DataModel dataModel_;
     rss.DataManager dataManager_;
