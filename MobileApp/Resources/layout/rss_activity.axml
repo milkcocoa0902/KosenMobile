@@ -3,14 +3,12 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-	<include
-		layout="@layout/rss_activity_main_content"/>
 	    <LinearLayout
         android:id="@+id/left_drawer"
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:background="#333" >
+        android:background="@color/white" >
  
         <Button
             android:id="@+id/drawer_button"
@@ -18,4 +16,7 @@
             android:layout_height="48dp"
             android:text="drawer button" />
     </LinearLayout>
+	
+	<include
+		layout="@layout/rss_activity_main_content"/>
 </android.support.v4.widget.DrawerLayout>
