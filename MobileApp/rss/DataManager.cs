@@ -27,25 +27,27 @@ namespace KosenMobile.rss {
       dataModel_ = new DataModel(_context);
       context_ = _context;
       if(!File.Exists(dataModel_.databasePath_)) {
-        CreateNew().Wait();
+        CreateNew();
         Log.Debug("RSS.DataManager", "Create New Database");
       } else {
         if(CheckForUpdate()) Update().Wait();
       }
 
-      Load().Wait();
+      Load();
       Log.Debug("RSS.DataManager", "Load Database");
     }
 
-    async Task CreateNew() {
+    void CreateNew() {
       client_ = new HttpClient();
       using(var request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://me.milkcocoa.info/WebAnalysis.db")))
-      using(var response = await client_.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)) {
+      using(var response = client_.SendAsync(request).Result) {
 
         if(response.StatusCode == HttpStatusCode.OK) {
 
           var content = response.Content;
-          var stream = await content.ReadAsStreamAsync();
+          var stream = content.ReadAsStreamAsync().Result;
+
+
           var path = dataModel_.databasePath_;
           var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
 
@@ -61,8 +63,8 @@ namespace KosenMobile.rss {
       client_ = new HttpClient();
       var endpoint = "http://kosenmobile.milkcocoa.info/update/";
       var count = dataModel_.dataRef_.Count;
-      var response = await client_.GetAsync(endpoint + count.ToString());
-      var jsonString = await response.Content.ReadAsStringAsync();
+      var response =  client_.GetAsync(endpoint + count.ToString()).Result;
+      var jsonString =  response.Content.ReadAsStringAsync().Result;
       var json = JsonConvert.DeserializeObject<List<DataModel.Model>>(jsonString);
       dataModel_.adddata(json);
     }
@@ -71,8 +73,8 @@ namespace KosenMobile.rss {
       return false;
     }
 
-    async Task Load() {
-      dataModel_.read();
+    void Load() {
+       dataModel_.read();
     }
   }
 }

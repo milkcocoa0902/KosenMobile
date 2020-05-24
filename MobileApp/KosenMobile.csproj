@@ -126,6 +126,9 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\text_with_checkbox.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\pdficon.png">
       <SubType></SubType>
       <Generator></Generator>
