@@ -59,9 +59,9 @@
     <Reference Include="Mono.Android" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rss\DataManager.cs" />
@@ -69,6 +69,10 @@
     <Compile Include="rss\RSSAdapter.cs" />
     <Compile Include="rss\ViewHolder.cs" />
     <Compile Include="rss\RSSDetailActivity.cs" />
+    <Compile Include="preference\DataModel.cs" />
+    <Compile Include="preference\DataManager.cs" />
+    <Compile Include="preference\PreferenceActivity.cs" />
+    <Compile Include="rss\RSSActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -76,7 +80,7 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\activity_main.xml">
+    <AndroidResource Include="Resources\layout\rss_activity_main_content.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\content_main.xml">
@@ -117,7 +121,19 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\preference_activity.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\text_with_checkbox.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\pdficon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\rss_activity.axml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -126,6 +142,7 @@
     <Folder Include="Resources\drawable\" />
     <Folder Include="rss\" />
     <Folder Include="src\" />
+    <Folder Include="preference\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />

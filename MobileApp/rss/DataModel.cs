@@ -30,9 +30,9 @@ namespace KosenMobile.rss {
     public IReadOnlyList<Model> dataRef_;
 
 
-    public DataModel(Context _context) : base(_context, System.IO.Path.Combine(_context.DataDir.Path, DataModel.databaseName_), null, databaseVersion_) {
+    public DataModel(Context _context) : base(_context, System.IO.Path.Combine(_context.GetExternalFilesDir(null).Path, DataModel.databaseName_), null, databaseVersion_) {
       context_ = _context;
-      databasePath_ = System.IO.Path.Combine(context_.DataDir.Path, DataModel.databaseName_);
+      databasePath_ = System.IO.Path.Combine(context_.GetExternalFilesDir(null).Path, DataModel.databaseName_);
       data_ = new List<Model>();
       dataRef_ = data_;
       HEADER = new Model() {
@@ -47,6 +47,7 @@ namespace KosenMobile.rss {
     public void adddata(List<Model> _data) {
       _data.Reverse();
       data_.InsertRange(0, _data);
+      write(_data);
     }
 
     public override void OnCreate(SQLiteDatabase db) {

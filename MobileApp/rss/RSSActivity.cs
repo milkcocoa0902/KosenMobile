@@ -10,17 +10,19 @@ using Android.Views;
 
 namespace KosenMobile {
   [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-  public class MainActivity : AppCompatActivity, SwipeRefreshLayout.IOnRefreshListener {
+  public class RSSActivity : AppCompatActivity, SwipeRefreshLayout.IOnRefreshListener {
     rss.Adapter adapter_;
     rss.DataModel dataModel_;
     rss.DataManager dataManager_;
     SwipeRefreshLayout swipe_;
     LinearLayoutManager manager_;
 
+    preference.DataManager preferenceManager;
+
     protected override void OnCreate(Bundle savedInstanceState) {
       base.OnCreate(savedInstanceState);
       Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-      SetContentView(Resource.Layout.activity_main);
+      SetContentView(Resource.Layout.rss_activity);
 
       Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
       toolbar.Title = "";
@@ -35,6 +37,8 @@ namespace KosenMobile {
         Application.Context.GetColor(Resource.Color.blue),
         Application.Context.GetColor(Resource.Color.limegreen)
       });
+
+      preferenceManager = new preference.DataManager(ApplicationContext);
 
 
       dataManager_ = new rss.DataManager(Application.Context);
@@ -66,6 +70,7 @@ namespace KosenMobile {
     public override bool OnOptionsItemSelected(IMenuItem item) {
       int id = item.ItemId;
       if(id == Resource.Id.action_settings) {
+        StartActivity(new Android.Content.Intent(ApplicationContext, typeof(preference.PreferenceActivity)));
         return true;
       }
 
