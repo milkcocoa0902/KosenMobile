@@ -76,6 +76,7 @@
     <Compile Include="util\NavigationDrawerUtility.cs" />
     <Compile Include="syllabus\model.cs" />
     <Compile Include="syllabus\DataManager.cs" />
+    <Compile Include="syllabus\SyllabusActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -128,7 +129,7 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\text_with_checkbox.axml">
+    <AndroidResource Include="Resources\layout\labeled_spinner.axml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -141,6 +142,10 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\drawer_header.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\syllabus_main_content.axml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

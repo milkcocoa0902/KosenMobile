@@ -9,6 +9,13 @@ using System.Text;
 namespace KosenMobile.syllabus {
 
 	public class DataModel {
+    public enum Course {
+      M = 1,
+      E = 2,
+      I = 3,
+      C = 4,
+      A = 5
+    };
 
 		public class Assessment {
 			[System.Xml.Serialization.XmlElement("Name")]

@@ -48,6 +48,8 @@ namespace KosenMobile.syllabus {
 
 
           stream.CopyTo(fileStream);
+          stream.Close();
+          fileStream.Close();
         }
       }
 
@@ -68,7 +70,7 @@ namespace KosenMobile.syllabus {
       return dataModel_.dataRef_.Where(sbj => sbj.grade_ == _grade).ToList();
     }
 
-    List<DataModel.Subject> course(int _course) {
+    List<DataModel.Subject> course(DataModel.Course _course) {
       return dataModel_.dataRef_.Where(sbj => sbj.course_ == _course.ToString()).ToList();
     }
 

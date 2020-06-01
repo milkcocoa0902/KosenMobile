@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/grade">
+		<TextView
+			android:text="学年"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/grade_title" />
+		<Spinner
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:minWidth="40px"
+			android:minHeight="40px"
+			android:layout_marginLeft="10dp"
+			android:id="@+id/grade_item"/>
+	</LinearLayout>
+	
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/grade"
+		android:layout_marginLeft="20dp"
+		>
+		<TextView
+			android:text="学科"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/course_title" />
+		<Spinner
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:minWidth="40px"
+			android:minHeight="40px"
+			android:layout_marginLeft="10dp"
+			android:id="@+id/course_item" />
+	</LinearLayout>
+	
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:layout_below="@id/grade"
+		>
+		<TextView
+			android:text="科目"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/subject_title" />
+		<Spinner
+			android:layout_width="165dp"
+			android:layout_height="wrap_content"
+			android:minWidth="40px"
+			android:minHeight="40px"
+			android:layout_marginLeft="10dp"
+			
+			android:id="@+id/subject_item" />
+	</LinearLayout>
+</RelativeLayout>

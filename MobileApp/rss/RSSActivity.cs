@@ -21,7 +21,6 @@ namespace KosenMobile {
     util.NavigationDrawerUtility drawerUtility_;
     NavigationView navigationView_;
 
-    syllabus.DataManager sylabusDataManager_;
 
     preference.DataManager preferenceManager;
 
@@ -75,8 +74,6 @@ namespace KosenMobile {
       navigationView_.SetNavigationItemSelectedListener(this);
 
 
-      sylabusDataManager_ = new syllabus.DataManager(ApplicationContext);
-
     }
 
     public override bool OnCreateOptionsMenu(IMenu menu) {
@@ -121,6 +118,10 @@ namespace KosenMobile {
       switch(menuItem.ItemId) {
       case Resource.Id.action_settings:
         StartActivity(new Android.Content.Intent(ApplicationContext, typeof(preference.PreferenceActivity)));
+        drawer_.CloseDrawer((int)GravityFlags.Start);
+        break;
+      case Resource.Id.action_syllabus:
+        StartActivity(new Android.Content.Intent(ApplicationContext, typeof(syllabus.SyllabusActivity)));
         drawer_.CloseDrawer((int)GravityFlags.Start);
         break;
       default:
