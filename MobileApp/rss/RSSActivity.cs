@@ -113,6 +113,14 @@ namespace KosenMobile {
     }
 
     public bool OnNavigationItemSelected(IMenuItem menuItem) {
+      switch(menuItem.ItemId) {
+      case Resource.Id.action_settings:
+        StartActivity(new Android.Content.Intent(ApplicationContext, typeof(preference.PreferenceActivity)));
+        drawer_.CloseDrawer((int)GravityFlags.Start);
+        break;
+      default:
+        break;
+      }
       return true;
     }
   }
