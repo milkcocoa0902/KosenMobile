@@ -73,6 +73,7 @@
     <Compile Include="preference\DataManager.cs" />
     <Compile Include="preference\PreferenceActivity.cs" />
     <Compile Include="rss\RSSActivity.cs" />
+    <Compile Include="util\NavigationDrawerUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -137,12 +138,17 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\drawer_header.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
     <Folder Include="rss\" />
     <Folder Include="src\" />
     <Folder Include="preference\" />
+    <Folder Include="util\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />

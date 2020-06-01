@@ -10,12 +10,16 @@ using Android.Views;
 
 namespace KosenMobile {
   [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-  public class RSSActivity : AppCompatActivity, SwipeRefreshLayout.IOnRefreshListener {
+  public class RSSActivity : AppCompatActivity, SwipeRefreshLayout.IOnRefreshListener, NavigationView.IOnNavigationItemSelectedListener {
     rss.Adapter adapter_;
     rss.DataModel dataModel_;
     rss.DataManager dataManager_;
     SwipeRefreshLayout swipe_;
     LinearLayoutManager manager_;
+    ActionBarDrawerToggle drawerToggle_;
+    DrawerLayout drawer_;
+    util.NavigationDrawerUtility drawerUtility_;
+    NavigationView navigationView_;
 
     preference.DataManager preferenceManager;
 
@@ -60,6 +64,14 @@ namespace KosenMobile {
       fab.Click += (sender, e) => {
       };
 
+      drawer_ = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+      drawerUtility_ = new util.NavigationDrawerUtility(this, drawer_, toolbar, Resource.String.app_name, Resource.String.app_name);
+      drawerUtility_.SyncState();
+      drawer_.AddDrawerListener(drawerUtility_);
+
+      navigationView_ = FindViewById<NavigationView>(Resource.Id.navigationView);
+      navigationView_.SetNavigationItemSelectedListener(this);
+
     }
 
     public override bool OnCreateOptionsMenu(IMenu menu) {
@@ -98,6 +110,18 @@ namespace KosenMobile {
         adapter_.NotifyDataSetChanged();
         swipe_.Refreshing = false;
       });
+    }
+
+    public bool OnNavigationItemSelected(IMenuItem menuItem) {
+      switch(menuItem.ItemId) {
+      case Resource.Id.action_settings:
+        StartActivity(new Android.Content.Intent(ApplicationContext, typeof(preference.PreferenceActivity)));
+        drawer_.CloseDrawer((int)GravityFlags.Start);
+        break;
+      default:
+        break;
+      }
+      return true;
     }
   }
 }
