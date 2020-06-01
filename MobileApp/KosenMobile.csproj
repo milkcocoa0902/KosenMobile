@@ -75,6 +75,7 @@
     <Compile Include="rss\RSSActivity.cs" />
     <Compile Include="util\NavigationDrawerUtility.cs" />
     <Compile Include="syllabus\model.cs" />
+    <Compile Include="syllabus\DataManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

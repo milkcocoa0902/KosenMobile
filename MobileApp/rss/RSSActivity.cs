@@ -21,6 +21,8 @@ namespace KosenMobile {
     util.NavigationDrawerUtility drawerUtility_;
     NavigationView navigationView_;
 
+    syllabus.DataManager sylabusDataManager_;
+
     preference.DataManager preferenceManager;
 
     protected override void OnCreate(Bundle savedInstanceState) {
@@ -71,6 +73,9 @@ namespace KosenMobile {
 
       navigationView_ = FindViewById<NavigationView>(Resource.Id.navigationView);
       navigationView_.SetNavigationItemSelectedListener(this);
+
+
+      sylabusDataManager_ = new syllabus.DataManager(ApplicationContext);
 
     }
 
