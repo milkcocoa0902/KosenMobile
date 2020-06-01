@@ -71,5 +71,9 @@ namespace KosenMobile.syllabus {
     List<DataModel.Subject> course(int _course) {
       return dataModel_.dataRef_.Where(sbj => sbj.course_ == _course.ToString()).ToList();
     }
+
+    List<DataModel.Subject> gradeAndCourse(int _grade, int _course) {
+      return grade(_grade).Where(sbj => sbj.course_ == _course.ToString()).ToList();
+    }
   }
 }
