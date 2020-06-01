@@ -74,6 +74,7 @@
     <Compile Include="preference\PreferenceActivity.cs" />
     <Compile Include="rss\RSSActivity.cs" />
     <Compile Include="util\NavigationDrawerUtility.cs" />
+    <Compile Include="syllabus\model.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -149,6 +150,7 @@
     <Folder Include="src\" />
     <Folder Include="preference\" />
     <Folder Include="util\" />
+    <Folder Include="syllabus\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
