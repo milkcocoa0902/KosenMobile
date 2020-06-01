@@ -9,6 +9,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Android.Content;
 using Android.Util;
+using System.Linq;
 
 namespace KosenMobile.syllabus {
   public class DataManager {
@@ -61,6 +62,14 @@ namespace KosenMobile.syllabus {
 
     void Load() {
       dataModel_.read();
+    }
+
+    List<DataModel.Subject> grade(int _grade) {
+      return dataModel_.dataRef_.Where(sbj => sbj.grade_ == _grade).ToList();
+    }
+
+    List<DataModel.Subject> course(int _course) {
+      return dataModel_.dataRef_.Where(sbj => sbj.course_ == _course.ToString()).ToList();
     }
   }
 }
