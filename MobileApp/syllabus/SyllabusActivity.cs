@@ -47,7 +47,7 @@ namespace KosenMobile.syllabus {
       gradeSpinner_.SetSelection(0);
 
       gradeSpinner_.ItemSelected += (sender, e) => {
-        sbjList_ = sylabusDataManager_.gradeAndCourse(gradeSpinner_.SelectedItemPosition + 1, (DataModel.Course)(new[] {1, 7, 2, 3, 4 }[courseSpinner_.SelectedItemPosition]));
+        sbjList_ = sylabusDataManager_.gradeAndCourse(gradeSpinner_.SelectedItemPosition + 1, (DataModel.Course)(new[] {1, 7, 3, 4, 5 }[courseSpinner_.SelectedItemPosition]));
         sbjSpinner_.Adapter = new ArrayAdapter(this,
           Resource.Layout.support_simple_spinner_dropdown_item,
           sbjList_.Select(sbj => sbj.title_).ToList());
@@ -63,7 +63,7 @@ namespace KosenMobile.syllabus {
       courseSpinner_.SetSelection(0);
 
       courseSpinner_.ItemSelected += (sender, e) => {
-        sbjList_ = sylabusDataManager_.gradeAndCourse(gradeSpinner_.SelectedItemPosition + 1, (DataModel.Course)(new[] { 1, 7, 2, 3, 4 }[courseSpinner_.SelectedItemPosition]));
+        sbjList_ = sylabusDataManager_.gradeAndCourse(gradeSpinner_.SelectedItemPosition + 1, (DataModel.Course)(new[] { 1, 7, 3, 4, 5 }[courseSpinner_.SelectedItemPosition]));
         sbjSpinner_.Adapter = new ArrayAdapter(this,
           Resource.Layout.support_simple_spinner_dropdown_item,
           sbjList_.Select(sbj => sbj.title_).ToList());
