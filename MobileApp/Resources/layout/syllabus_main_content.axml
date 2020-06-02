@@ -68,7 +68,6 @@
 			android:minWidth="40px"
 			android:minHeight="40px"
 			android:layout_marginLeft="10dp"
-			
 			android:id="@+id/subject_item" />
 	</LinearLayout>
 </RelativeLayout>
