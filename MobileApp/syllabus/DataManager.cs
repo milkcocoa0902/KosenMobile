@@ -66,16 +66,16 @@ namespace KosenMobile.syllabus {
       dataModel_.read();
     }
 
-    List<DataModel.Subject> grade(int _grade) {
+    public List<DataModel.Subject> grade(int _grade) {
       return dataModel_.dataRef_.Where(sbj => sbj.grade_ == _grade).ToList();
     }
 
-    List<DataModel.Subject> course(DataModel.Course _course) {
+    public List<DataModel.Subject> course(DataModel.Course _course) {
       return dataModel_.dataRef_.Where(sbj => sbj.course_ == _course.ToString()).ToList();
     }
 
-    List<DataModel.Subject> gradeAndCourse(int _grade, int _course) {
-      return grade(_grade).Where(sbj => sbj.course_ == _course.ToString()).ToList();
+    public List<DataModel.Subject> gradeAndCourse(int _grade, DataModel.Course _course) {
+      return grade(_grade).Where(sbj => sbj.course_ == ((int)(_course)).ToString()).ToList();
     }
   }
 }
