@@ -110,8 +110,8 @@ namespace WebAnalysis.Syllabus{
 								Subject model = new Subject();
 								model.id_ = q.subject_code;
 
-								model.course_ = q.subject_code[1].ToString();
-								model.grade_ = q.subject_code[2] - '0';
+								model.course_ = q.subject_code[0].ToString();
+								model.grade_ = q.subject_code[1] - '0';
 
 								model.title_ = (parser.ParseDocumentAsync(res.Content.ReadAsStringAsync().Result)).Result
 													.GetElementsByClassName("mcc-title-bar")[0]
