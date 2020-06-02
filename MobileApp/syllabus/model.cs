@@ -11,7 +11,7 @@ namespace KosenMobile.syllabus {
 	public class DataModel {
     public enum Course {
       M = 1,
-      E = 2,
+      E = 7,
       I = 3,
       C = 4,
       A = 5
@@ -64,7 +64,6 @@ namespace KosenMobile.syllabus {
 		}
 
     public void read() {
-
 			data_ = (List<Subject>)((new XmlSerializer(typeof(List<Subject>))).Deserialize(System.Xml.XmlReader.Create(new StreamReader(databasePath_, Encoding.UTF8))));
 			dataRef_ = data_;
 		}
