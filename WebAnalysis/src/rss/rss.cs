@@ -55,7 +55,13 @@ namespace WebAnalysis.RSS{
 
 					Parallel.For(1, int.Parse(last) + 1, (int _page)=>{
 						Console.WriteLine("page:{0}", _page);
-						Parallel.ForEach(GetInformation(url_ + "page/" + _page).Result, (_elm)=>{publish.Add(_elm);});
+						Parallel.ForEach(GetInformation(url_ + "page/" + _page).Result, 
+										(_elm)=>{
+												var tryAdd = false;
+												do{
+														tryAdd = publish.TryAdd(_elm, 500);
+												}while(!tryAdd);
+										});
 					});
 
 					Parallel.ForEach(publish.ToList(), (_elm)=>{
@@ -66,8 +72,15 @@ namespace WebAnalysis.RSS{
 						if(contain == 0){
 							Console.WriteLine("element {0} does not stored!!", _elm.hash_);
 							_elm.id_ = (++maxId_);
-							strage_.Add(_elm);
-							newElm.Add(_elm);
+
+							var tryAdd = false;
+							do{
+									tryAdd = strage_.TryAdd(_elm, 500);
+							}while(!tryAdd);
+
+							do{
+									tryAdd = newElm.TryAdd(_elm, 500);
+							}while(!tryAdd);
 						}
 					});
 
@@ -104,7 +117,10 @@ namespace WebAnalysis.RSS{
 											date_ = date,
 											hash_ = hash};
 							}).ToList(), (v)=>{
-								elm.Add(v);
+								var tryAdd = false;
+								do{
+										tryAdd = elm.TryAdd(v, 500);
+								}while(!tryAdd);
 							});
 						}catch(Exception e){
 							Console.WriteLine(e.ToString());
