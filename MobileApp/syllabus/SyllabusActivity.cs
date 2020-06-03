@@ -33,7 +33,7 @@ namespace KosenMobile.syllabus {
       gradeSpinner_ = FindViewById<Spinner>(Resource.Id.grade_item);
       courseSpinner_ = FindViewById<Spinner>(Resource.Id.course_item);
 
-      new System.Threading.Tasks.Task(() => {
+      //new System.Threading.Tasks.Task(() => {
         sylabusDataManager_ = new syllabus.DataManager(ApplicationContext);
 
         sbjList_ = sylabusDataManager_.gradeAndCourse(1, DataModel.Course.M);
@@ -78,7 +78,7 @@ namespace KosenMobile.syllabus {
             Resource.Layout.support_simple_spinner_dropdown_item,
             sbjList_.Select(sbj => sbj.title_).ToList());
         };
-      }).Start();
+     // }).Start();
     }
   }
 }

@@ -1,59 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+	android:orientation="vertical"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
+	
 	<LinearLayout
 		android:orientation="horizontal"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:id="@+id/grade">
-		<TextView
-			android:text="学年"
-			android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_height="wrap_content">
+		<LinearLayout
+			android:orientation="horizontal"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/grade_title" />
-		<Spinner
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:minWidth="40px"
-			android:minHeight="40px"
-			android:layout_marginLeft="10dp"
-			android:id="@+id/grade_item"/>
-	</LinearLayout>
-	
+			android:id="@+id/grade">
+			<TextView
+				android:text="学年"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/grade_title" />
+			<Spinner
+				android:layout_width="75.0dp"
+				android:layout_height="wrap_content"
+				android:minWidth="40px"
+				android:minHeight="40px"
+				android:layout_marginLeft="10dp"
+				android:id="@+id/grade_item"
+				android:dropDownWidth="match_parent"
+				android:spinnerMode="dialog" />
+		</LinearLayout>
 
-	<LinearLayout
-		android:orientation="horizontal"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_toRightOf="@id/grade"
-		android:layout_marginLeft="20dp"
-		>
-		<TextView
-			android:text="学科"
-			android:textAppearance="?android:attr/textAppearanceMedium"
+
+		<LinearLayout
+			android:orientation="horizontal"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/course_title" />
-		<Spinner
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:minWidth="40px"
-			android:minHeight="40px"
-			android:layout_marginLeft="10dp"
-			android:id="@+id/course_item" />
-	</LinearLayout>
-	
+			android:layout_toRightOf="@id/grade"
+			android:layout_marginLeft="20dp"
+			android:id="@+id/course"
+			>
+			<TextView
+				android:text="学科"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/course_title" />
+			<Spinner
+				android:layout_width="75.0dp"
+				android:layout_height="wrap_content"
+				android:minWidth="40px"
+				android:minHeight="40px"
+				android:layout_marginLeft="10dp"
+				android:id="@+id/course_item"
+				android:dropDownWidth="fill_parent"
+				android:spinnerMode="dialog" />
+		</LinearLayout>
+		</LinearLayout>>
 
 	<LinearLayout
 		android:orientation="horizontal"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="10dp"
+		android:id="@+id/subject"
 		android:layout_below="@id/grade"
 		>
 		<TextView
@@ -63,11 +75,133 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/subject_title" />
 		<Spinner
-			android:layout_width="165dp"
+			android:layout_width="215dp"
 			android:layout_height="wrap_content"
 			android:minWidth="40px"
 			android:minHeight="40px"
 			android:layout_marginLeft="10dp"
-			android:id="@+id/subject_item" />
+			android:id="@+id/subject_item"
+			android:dropDownWidth="match_parent"
+			android:spinnerMode="dialog" />
 	</LinearLayout>
-</RelativeLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:id="@+id/credit"
+		android:layout_below="@id/subject"
+		>
+		<TextView
+			android:text="単位数："
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/credit_title" />
+		<TextView
+			android:text="0"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/credit_item" />
+	</LinearLayout>
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:id="@+id/assesment"
+		android:layout_below="@id/credit"
+		>
+		<TextView
+			android:text="評価割合："
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/credit_title" />
+		<TextView
+			android:text="小テスト(20%)"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="20dp"/>
+		<TextView
+			android:text="中間試験(30%)"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="20dp"/>
+		<TextView
+			android:text="定期試験(50%)"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="20dp"/>
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginTop="20dp"
+		android:layout_marginBottom="20dp"
+		android:background="#ff808080"
+		android:id="@+id/center_line"
+		android:layout_below="@id/assesment"/>
+	<RadioGroup
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/rankButtons"
+		android:layout_below="@id/center_line"
+		android:orientation="horizontal">
+		<RadioButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:checked="true"
+			android:text="A"
+			android:id="@+id/radioButton1" />
+		<RadioButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="B"
+			android:id="@+id/radioButton2"/>
+		<RadioButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="C"
+			android:id="@+id/radioButton3" />
+	</RadioGroup>
+	<RadioGroup
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/mode"
+		android:layout_below="@id/rankButtons">
+		<RadioButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:checked="true"
+			android:text="最終評定"
+			android:id="@+id/modeLast" />
+		<RadioButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="必要な点数"
+			android:id="@+id/modeNeeded" />
+	</RadioGroup>
+	<include
+		layout="@layout/textinput_with_label"
+		android:id="@+id/aaaaa"/>
+	<include
+		layout="@layout/textinput_with_label"
+		android:id="@+id/bbbbb"/>
+	<include
+		layout="@layout/textinput_with_label"
+		android:id="@+id/ccccc"/>
+
+
+</LinearLayout>
