@@ -10,6 +10,7 @@ namespace KosenMobile.syllabus {
 
 	public class DataModel {
     public enum Course {
+      G = 0,
       M = 1,
       E = 7,
       I = 3,
