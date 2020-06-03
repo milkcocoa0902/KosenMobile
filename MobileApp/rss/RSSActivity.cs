@@ -21,11 +21,11 @@ namespace KosenMobile {
     util.NavigationDrawerUtility drawerUtility_;
     NavigationView navigationView_;
 
+
     preference.DataManager preferenceManager;
 
     protected override void OnCreate(Bundle savedInstanceState) {
       base.OnCreate(savedInstanceState);
-      Xamarin.Essentials.Platform.Init(this, savedInstanceState);
       SetContentView(Resource.Layout.rss_activity);
 
       Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
@@ -72,6 +72,7 @@ namespace KosenMobile {
       navigationView_ = FindViewById<NavigationView>(Resource.Id.navigationView);
       navigationView_.SetNavigationItemSelectedListener(this);
 
+
     }
 
     public override bool OnCreateOptionsMenu(IMenu menu) {
@@ -116,6 +117,10 @@ namespace KosenMobile {
       switch(menuItem.ItemId) {
       case Resource.Id.action_settings:
         StartActivity(new Android.Content.Intent(ApplicationContext, typeof(preference.PreferenceActivity)));
+        drawer_.CloseDrawer((int)GravityFlags.Start);
+        break;
+      case Resource.Id.action_syllabus:
+        StartActivity(new Android.Content.Intent(ApplicationContext, typeof(syllabus.SyllabusActivity)));
         drawer_.CloseDrawer((int)GravityFlags.Start);
         break;
       default:

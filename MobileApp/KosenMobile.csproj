@@ -74,6 +74,9 @@
     <Compile Include="preference\PreferenceActivity.cs" />
     <Compile Include="rss\RSSActivity.cs" />
     <Compile Include="util\NavigationDrawerUtility.cs" />
+    <Compile Include="syllabus\model.cs" />
+    <Compile Include="syllabus\DataManager.cs" />
+    <Compile Include="syllabus\SyllabusActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -126,7 +129,7 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\text_with_checkbox.axml">
+    <AndroidResource Include="Resources\layout\labeled_spinner.axml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -142,6 +145,14 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\syllabus_main_content.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\textinput_with_label.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -149,6 +160,7 @@
     <Folder Include="src\" />
     <Folder Include="preference\" />
     <Folder Include="util\" />
+    <Folder Include="syllabus\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
